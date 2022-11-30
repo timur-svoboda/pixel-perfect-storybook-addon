@@ -27,6 +27,7 @@
     "*.d.ts"
   ],
   "scripts": {
+    "prepare": "husky install",
     "clean": "rimraf ./dist",
     "buildBabel": "concurrently \"yarn buildBabel:cjs\" \"yarn buildBabel:esm\"",
     "buildBabel:cjs": "babel ./src -d ./dist/cjs --extensions \".js,.jsx,.ts,.tsx\"",
@@ -58,13 +59,15 @@
     "boxen": "^5.0.1",
     "concurrently": "^6.2.0",
     "dedent": "^0.7.0",
+    "husky": "8.0.2",
     "prettier": "^2.3.1",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "rimraf": "^3.0.2",
     "typescript": "^4.2.4",
-    "zx": "^1.14.1"
+    "yargs": "17.6.2",
+    "zx": "^7.1.1"
   },
   "peerDependencies": {
     "@storybook/addons": "^6.5.8",
