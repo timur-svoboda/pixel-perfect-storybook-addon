@@ -1,0 +1,22 @@
+name: Lint pull request title and body
+on:
+  pull_request:
+    types: [opened, edited]
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js 16
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Install dependencies
+        uses: bahmutov/npm-install@v1
+
+      - name: Lint
+        run: |
+          message="${{ github.event.pull_request.title }}\n\n${{ github.event.pull_request.body }}"
+          echo -e $message | npx commitlint
