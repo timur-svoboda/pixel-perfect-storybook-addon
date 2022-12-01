@@ -1,0 +1,24 @@
+name: Lint pull request title and body
+on:
+  pull_request:
+    types: [opened, edited]
+jobs:
+  lint:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js 16
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Install dependencies
+        uses: bahmutov/npm-install@v1
+
+      - name: Lint
+        run: |
+          title="${{ github.event.pull_request.title }}"
+          body="${{ github.event.pull_request.body }}"
+          echo -e "$title\n\n$body" > commit-message
+          npx commitlint --edit commit-message
