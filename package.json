@@ -3,7 +3,13 @@
   "version": "0.0.0",
   "description": "Build pixel perfect components by adding an overlaying image of component in Storybook's preview iframe.",
   "keywords": [
-    "storybook-addons", "pixel", "pefect", "style", "design", "appearance", "storybook-addons"
+    "storybook-addons",
+    "pixel",
+    "pefect",
+    "style",
+    "design",
+    "appearance",
+    "storybook-addons"
   ],
   "repository": {
     "type": "git",
@@ -21,6 +27,7 @@
     "*.d.ts"
   ],
   "scripts": {
+    "prepare": "husky install",
     "clean": "rimraf ./dist",
     "buildBabel": "concurrently \"yarn buildBabel:cjs\" \"yarn buildBabel:esm\"",
     "buildBabel:cjs": "babel ./src -d ./dist/cjs --extensions \".js,.jsx,.ts,.tsx\"",
@@ -43,6 +50,8 @@
     "@babel/preset-env": "^7.12.1",
     "@babel/preset-react": "^7.12.5",
     "@babel/preset-typescript": "^7.13.0",
+    "@commitlint/cli": "17.2.0",
+    "@commitlint/config-conventional": "17.2.0",
     "@storybook/addon-essentials": "^6.5.8",
     "@storybook/react": "^6.5.8",
     "auto": "^10.3.0",
@@ -50,13 +59,15 @@
     "boxen": "^5.0.1",
     "concurrently": "^6.2.0",
     "dedent": "^0.7.0",
+    "husky": "8.0.2",
     "prettier": "^2.3.1",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "rimraf": "^3.0.2",
     "typescript": "^4.2.4",
-    "zx": "^1.14.1"
+    "yargs": "17.6.2",
+    "zx": "^7.1.1"
   },
   "peerDependencies": {
     "@storybook/addons": "^6.5.8",
@@ -81,7 +92,15 @@
   "storybook": {
     "displayName": "Pixel Perfect",
     "supportedFrameworks": [
-      "react", "vue", "angular", "web-components", "ember", "html", "svelte", "preact", "react-native"
+      "react",
+      "vue",
+      "angular",
+      "web-components",
+      "ember",
+      "html",
+      "svelte",
+      "preact",
+      "react-native"
     ],
     "icon": "https://user-images.githubusercontent.com/321738/63501763-88dbf600-c4cc-11e9-96cd-94adadc2fd72.png"
   }
