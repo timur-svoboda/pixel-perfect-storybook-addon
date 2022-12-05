@@ -1,0 +1,47 @@
+name: Lint code
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  lint:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js 16
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Install dependencies
+        uses: bahmutov/npm-install@v1
+
+      - name: Lint
+        run: |
+          # Get range
+          before=""
+          after=""
+
+          if [[ ${{ github.event_name }} = "pull_request" ]]
+          then
+            before="${{ github.event.pull_request.base.sha }}"
+            after="${{ github.event.pull_request.head.sha }}"
+          elif [[ ${{ github.event_name }} = "push" ]]
+          then
+            before="${{ github.event.before }}"
+            after="${{ github.event.after }}"
+          fi
+
+          # Get files to lint
+          git diff $before..$after --name-only > changed-files.txt
+          files_to_lint=$(grep -E "^.*\.(js|jsx|ts|tsx)$" changed-files.txt)
+
+          # Lint
+          npx eslint $files_to_lint
+
+          # Clean up
+          rm changed-files.txt
