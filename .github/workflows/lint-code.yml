@@ -11,6 +11,18 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 3
+
+      - name: Debug repository
+        run: |
+          echo "git branch --show-current:"
+          git branch --show-current
+
+          echo ""
+
+          echo "git log:"
+          git log
 
       - name: Use Node.js 16
         uses: actions/setup-node@v3
