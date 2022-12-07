@@ -1,5 +1,6 @@
 import type { DecoratorFunction } from "@storybook/addons";
 import { useEffect, useGlobals } from "@storybook/addons";
+import renderOverlay from './utils/render-overlay';
 
 export const withGlobals: DecoratorFunction = (StoryFn, context) => {
   const [{ myAddon }] = useGlobals();
@@ -20,6 +21,18 @@ export const withGlobals: DecoratorFunction = (StoryFn, context) => {
       theme,
     });
   }, [myAddon, theme]);
+
+  useEffect(() => {
+    if (context.parameters?.pixelPerfect?.overlaySrc) {
+      const overlay = renderOverlay({
+        src: context.parameters.pixelPerfect.overlaySrc
+      });
+
+      () => {
+        overlay.remove();
+      }
+    }
+  }, [context.parameters?.pixelPerfect?.overlaySrc]);
 
   return StoryFn();
 };

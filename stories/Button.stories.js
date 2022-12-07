@@ -20,20 +20,40 @@ Primary.args = {
   primary: true,
   label: "Button",
 };
+Primary.parameters = {
+  pixelPerfect: {
+    overlaySrc: "/pixel-perfect/button-primary.png",
+  },
+}
 
 export const Secondary = Template.bind({});
 Secondary.args = {
   label: "Button",
 };
+Secondary.parameters = {
+  pixelPerfect: {
+    overlaySrc: "/pixel-perfect/button-secondary.png",
+  },
+}
 
 export const Large = Template.bind({});
 Large.args = {
   size: "large",
   label: "Button",
 };
+Large.parameters = {
+  pixelPerfect: {
+    overlaySrc: "/pixel-perfect/button-large.png",
+  },
+}
 
 export const Small = Template.bind({});
 Small.args = {
   size: "small",
   label: "Button",
 };
+Small.parameters = {
+  pixelPerfect: {
+    overlaySrc: "/pixel-perfect/button-small.png",
+  },
+}
