@@ -3,7 +3,7 @@ import { useEffect, useGlobals } from "@storybook/addons";
 import renderOverlay from './utils/render-overlay';
 
 export const withGlobals: DecoratorFunction = (StoryFn, context) => {
-  const [{ myAddon }] = useGlobals();
+  const [{ myAddon, pixelPerfect }] = useGlobals();
   // Is the addon being used in the docs panel
   const isInDocs = context.viewMode === "docs";
   const { theme } = context.globals;
@@ -23,16 +23,19 @@ export const withGlobals: DecoratorFunction = (StoryFn, context) => {
   }, [myAddon, theme]);
 
   useEffect(() => {
-    if (context.parameters?.pixelPerfect?.overlaySrc) {
+    if (
+      context.parameters?.pixelPerfect?.overlaySrc
+      && pixelPerfect?.active
+    ) {
       const overlay = renderOverlay({
         src: context.parameters.pixelPerfect.overlaySrc
       });
 
-      () => {
+      return () => {
         overlay.remove();
       }
     }
-  }, [context.parameters?.pixelPerfect?.overlaySrc]);
+  }, [context.parameters?.pixelPerfect?.overlaySrc, pixelPerfect?.active]);
 
   return StoryFn();
 };
