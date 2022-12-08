@@ -23,6 +23,7 @@ const renderOverlay = ({ src }: RenderOverlayArgs) => {
   overlay.style.zIndex = "100000";
   overlay.style.opacity = "0.5";
   overlay.style.filter = "invert(1)";
+  overlay.style.pointerEvents = "none";
 
   root.appendChild(overlay);
 
