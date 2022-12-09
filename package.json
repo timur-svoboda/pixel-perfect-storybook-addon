@@ -57,6 +57,7 @@
     "auto": "^10.3.0",
     "babel-loader": "^8.1.0",
     "boxen": "^5.0.1",
+    "chromatic": "6.11.4",
     "concurrently": "^6.2.0",
     "dedent": "^0.7.0",
     "husky": "8.0.2",
