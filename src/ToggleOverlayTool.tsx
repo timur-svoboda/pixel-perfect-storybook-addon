@@ -1,9 +1,9 @@
 import React, { useCallback } from "react";
 import { useGlobals } from "@storybook/api";
 import { Icons, IconButton } from "@storybook/components";
-import { TOOL_ID } from "./constants";
+import { TOGGLE_OVERLAY_TOOL_ID } from "./constants";
 
-export const Tool = () => {
+export const ToggleOverlayTool = () => {
   const [{ pixelPerfect }, updateGlobals] = useGlobals();
 
   const toggleOverlay = useCallback(
@@ -18,7 +18,7 @@ export const Tool = () => {
 
   return (
     <IconButton
-      key={TOOL_ID}
+      key={TOGGLE_OVERLAY_TOOL_ID}
       active={pixelPerfect?.active}
       title="Toggle the component overlaying image"
       onClick={toggleOverlay}
