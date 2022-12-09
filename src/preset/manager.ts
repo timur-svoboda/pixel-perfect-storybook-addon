@@ -1,15 +1,15 @@
 import { addons, types } from "@storybook/addons";
 
-import { ADDON_ID, TOOL_ID } from "../constants";
-import { Tool } from "../Tool";
+import { ADDON_ID, TOGGLE_OVERLAY_TOOL_ID } from "../constants";
+import { ToggleOverlayTool } from "../ToggleOverlayTool";
 
 // Register the addon
 addons.register(ADDON_ID, () => {
   // Register the tool
-  addons.add(TOOL_ID, {
+  addons.add(TOGGLE_OVERLAY_TOOL_ID, {
     type: types.TOOL,
-    title: "My addon",
+    title: "Toggle overlay",
     match: ({ viewMode }) => !!(viewMode && viewMode.match(/^story$/)),
-    render: Tool,
+    render: ToggleOverlayTool,
   });
 });
