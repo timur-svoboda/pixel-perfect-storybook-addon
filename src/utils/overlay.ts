@@ -1,29 +1,46 @@
-import { OverlayOptions } from "src/types";
+import { DEFAULT_OVERLAY_OPTIONS } from "../constants";
+import { OverlayOptions } from "../types";
 
 const rootSelector = "#root";
 const overlayId = "pixel-perfect-overlay";
 
-export const renderOverlay = ({ src }: OverlayOptions) => {
+export const renderOverlay = ({ src, opacity }: OverlayOptions) => {
   const root = document.querySelector(rootSelector);
   if (!root) return;
 
   const rootRect = root.getBoundingClientRect();
 
-  const overlay = document.createElement("img");
+  const existingOverlay = root.querySelector(`#${overlayId}`) as HTMLElement;
 
-  overlay.setAttribute("id", overlayId);
-  overlay.setAttribute("src", src);
-  overlay.setAttribute("alt", "pixel perfect overlaying image");
+  if (!existingOverlay) {
+    const newOverlay = document.createElement("img");
+    
+    newOverlay.setAttribute("id", overlayId);
+    newOverlay.setAttribute("src", src);
+    newOverlay.setAttribute("alt", "pixel perfect overlaying image");
 
-  overlay.style.position = "absolute";
-  overlay.style.top = `${rootRect.top}px`;
-  overlay.style.left = `${rootRect.left}px`;
-  overlay.style.zIndex = "100000";
-  overlay.style.opacity = "0.5";
-  overlay.style.filter = "invert(1)";
-  overlay.style.pointerEvents = "none";
+    newOverlay.style.position = "absolute";
+    newOverlay.style.top = `${rootRect.top}px`;
+    newOverlay.style.left = `${rootRect.left}px`;
+    newOverlay.style.zIndex = "100000";
 
-  root.appendChild(overlay);
+    newOverlay.style.opacity = opacity !== undefined
+      ? `${opacity}`
+      : `${DEFAULT_OVERLAY_OPTIONS.opacity}`;
+
+      newOverlay.style.filter = "invert(1)";
+      newOverlay.style.pointerEvents = "none";
+
+    root.appendChild(newOverlay);
+  } else {
+    if (existingOverlay.getAttribute("src") !== src) {
+      existingOverlay.setAttribute("src", src);
+    }
+
+    if (Number(existingOverlay.style.opacity) !== opacity) {
+      existingOverlay.style.opacity = `${opacity}`;
+    }
+  }
 }
 
 export const removeOverlay =() => {
