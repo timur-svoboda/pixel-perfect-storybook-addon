@@ -1,11 +1,9 @@
+import { OverlayOptions } from "src/types";
+
 const rootSelector = "#root";
 const overlayId = "pixel-perfect-overlay";
 
-interface RenderOverlayArgs {
-  src: string;
-}
-
-export const renderOverlay = ({ src }: RenderOverlayArgs) => {
+export const renderOverlay = ({ src }: OverlayOptions) => {
   const root = document.querySelector(rootSelector);
   if (!root) return;
 

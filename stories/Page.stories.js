@@ -16,7 +16,9 @@ LoggedIn.args = {
 };
 LoggedIn.parameters = {
   pixelPerfect: {
-    overlaySrc: "/pixel-perfect/page-logged-in.png",
+    overlay: {
+      src: "/pixel-perfect/page-logged-in.png",
+    },
   },
 };
 
@@ -26,6 +28,8 @@ LoggedOut.args = {
 };
 LoggedOut.parameters = {
   pixelPerfect: {
-    overlaySrc: "/pixel-perfect/page-logged-out.png",
+    overlay: {
+      src: "/pixel-perfect/page-logged-out.png",
+    },
   },
 };

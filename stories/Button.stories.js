@@ -15,7 +15,9 @@ Primary.args = {
 };
 Primary.parameters = {
   pixelPerfect: {
-    overlaySrc: "/pixel-perfect/button-primary.png",
+    overlay: {
+      src: "/pixel-perfect/button-primary.png",
+    },
   },
 }
 
@@ -25,7 +27,9 @@ Secondary.args = {
 };
 Secondary.parameters = {
   pixelPerfect: {
-    overlaySrc: "/pixel-perfect/button-secondary.png",
+    overlay: {
+      src: "/pixel-perfect/button-secondary.png",
+    },
   },
 }
 
@@ -36,7 +40,9 @@ Large.args = {
 };
 Large.parameters = {
   pixelPerfect: {
-    overlaySrc: "/pixel-perfect/button-large.png",
+    overlay: {
+      src: "/pixel-perfect/button-large.png"
+    },
   },
 }
 
@@ -47,6 +53,8 @@ Small.args = {
 };
 Small.parameters = {
   pixelPerfect: {
-    overlaySrc: "/pixel-perfect/button-small.png",
+    overlay: {
+      src: "/pixel-perfect/button-small.png"
+    },
   },
 }
