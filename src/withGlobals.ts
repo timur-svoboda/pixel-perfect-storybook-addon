@@ -1,6 +1,6 @@
 import type { DecoratorFunction } from "@storybook/addons";
 import { useEffect, useGlobals } from "@storybook/addons";
-import renderOverlay from './utils/render-overlay';
+import { renderOverlay, removeOverlay } from './utils/overlay';
 
 export const withGlobals: DecoratorFunction = (StoryFn, context) => {
   const [{ pixelPerfect }] = useGlobals();
@@ -10,13 +10,11 @@ export const withGlobals: DecoratorFunction = (StoryFn, context) => {
       context.parameters?.pixelPerfect?.overlaySrc
       && pixelPerfect?.active
     ) {
-      const overlay = renderOverlay({
+      renderOverlay({
         src: context.parameters.pixelPerfect.overlaySrc
       });
 
-      return () => {
-        overlay.remove();
-      }
+      return () => removeOverlay();
     }
   }, [context.parameters?.pixelPerfect?.overlaySrc, pixelPerfect?.active]);
 
