@@ -1,10 +1,10 @@
 import React, { useMemo, useEffect, useCallback } from "react";
-import ControlTable from './ui/control-table/control-table';
-import Slider from '@mui/material/Slider';
+import { Checkbox, Slider } from "@mui/material";
 import { useAddonState, useStorybookState, useParameter, useChannel } from "@storybook/api";
-import { DEFAULT_OVERLAY_OPTIONS, EVENTS, DYNAMIC_OVERLAYS_OPTIONS_STATE, PARAM_KEY } from "../../constants";
-import { Parameter, DynamicOverlayOptions } from "../../types";
 import { themes } from "@storybook/theming";
+import ControlTable from './ui/control-table/control-table';
+import { DEFAULT_DYNAMIC_OVERLAY_OPTIONS, EVENTS, DYNAMIC_OVERLAYS_OPTIONS_STATE, PARAM_KEY } from "../../constants";
+import { Parameter, DynamicOverlayOptions } from "../../types";
 
 const PanelContent = () => {
   const parameter = useParameter<Parameter>(PARAM_KEY);
@@ -48,7 +48,7 @@ const PanelContent = () => {
               value={
                 currentDynamicOverlayOptions?.opacity
                 ?? parameter?.overlay?.opacity
-                ?? DEFAULT_OVERLAY_OPTIONS.opacity
+                ?? DEFAULT_DYNAMIC_OVERLAY_OPTIONS.opacity
               }
               min={0}
               max={1}
@@ -56,6 +56,21 @@ const PanelContent = () => {
               onChange={(_, value) => updateOverlayOptions({ opacity: value as number })}
               aria-label="Opacity"
               valueLabelDisplay="auto"
+              sx={{
+                color: themes.normal.colorSecondary,
+              }}
+            />,
+          },
+          {
+            name: "Enable color inversion",
+            control: <Checkbox
+              checked={
+                currentDynamicOverlayOptions.colorInversion
+                ?? parameter?.overlay?.colorInversion
+                ?? DEFAULT_DYNAMIC_OVERLAY_OPTIONS.colorInversion
+              }
+              onChange={(_, value) => updateOverlayOptions({ colorInversion: value })}
+              aria-label="Toggle color inversion"
               sx={{
                 color: themes.normal.colorSecondary,
               }}

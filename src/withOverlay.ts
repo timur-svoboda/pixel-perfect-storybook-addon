@@ -1,5 +1,5 @@
 import { DecoratorFunction, useChannel, useEffect, useState } from "@storybook/addons";
-import { EVENTS } from "./constants";
+import { DEFAULT_DYNAMIC_OVERLAY_OPTIONS, EVENTS } from "./constants";
 import { DynamicOverlayOptions } from "./types";
 import { renderOverlay, removeOverlay } from './utils/overlay';
 
@@ -20,6 +20,7 @@ export const withOverlay: DecoratorFunction = (StoryFn, context) => {
   useEffect(() => {
     if (global?.active && parameter) {
       renderOverlay({
+        ...DEFAULT_DYNAMIC_OVERLAY_OPTIONS,
         ...parameter.overlay,
         ...currentDynamicOverlayOptions,
       });
