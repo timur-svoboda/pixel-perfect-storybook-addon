@@ -17,6 +17,7 @@ Primary.parameters = {
   pixelPerfect: {
     overlay: {
       src: "/pixel-perfect/button-primary.png",
+      opacity: 0.7,
     },
   },
 }
@@ -41,7 +42,7 @@ Large.args = {
 Large.parameters = {
   pixelPerfect: {
     overlay: {
-      src: "/pixel-perfect/button-large.png"
+      src: "/pixel-perfect/button-large.png",
     },
   },
 }
