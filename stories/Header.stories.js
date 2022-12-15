@@ -15,7 +15,9 @@ LoggedIn.args = {
 };
 LoggedIn.parameters = {
   pixelPerfect: {
-    overlaySrc: "/pixel-perfect/header-logged-in.png",
+    overlay: {
+      src: "/pixel-perfect/header-logged-in.png",
+    },
   },
 };
 
@@ -23,6 +25,8 @@ export const LoggedOut = Template.bind({});
 LoggedOut.args = {};
 LoggedOut.parameters = {
   pixelPerfect: {
-    overlaySrc: "/pixel-perfect/header-logged-out.png",
+    overlay: {
+      src: "/pixel-perfect/header-logged-out.png",
+    },
   },
 };

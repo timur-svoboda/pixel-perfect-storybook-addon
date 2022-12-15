@@ -1,4 +1,4 @@
-import { withGlobals } from "../withGlobals";
+import { withOverlay } from "../withOverlay";
 
-export const decorators = [withGlobals];
+export const decorators = [withOverlay];
 
