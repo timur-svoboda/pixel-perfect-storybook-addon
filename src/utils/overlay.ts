@@ -5,7 +5,7 @@ interface RenderOverlayArgs {
   src: string;
 }
 
-const renderOverlay = ({ src }: RenderOverlayArgs) => {
+export const renderOverlay = ({ src }: RenderOverlayArgs) => {
   const root = document.querySelector(rootSelector);
   if (!root) return;
 
@@ -26,8 +26,10 @@ const renderOverlay = ({ src }: RenderOverlayArgs) => {
   overlay.style.pointerEvents = "none";
 
   root.appendChild(overlay);
-
-  return overlay;
 }
 
-export default renderOverlay;
+export const removeOverlay =() => {
+  const overlay = document.querySelector(`${rootSelector} #${overlayId}`);
+  if (!overlay) return;
+  overlay.remove();
+}
