@@ -12,7 +12,31 @@ Build pixel perfect components by adding an overlaying image of component in Sto
 - Overlay color inversion toggling.
 - Overlay options resetting.
 
-## Usage
+## Getting Started
+
+### Installation
+
+```sh
+npm install -D pixel-perfect-storybook-addon
+```
+
+Or
+
+```sh
+yarn add -D pixel-perfect-storybook-addon
+```
+
+Then, update _.storybook/main.js_ with the following ([Find out more here](https://storybook.js.org/docs/react/configure/overview#configure-your-storybook-project)):
+
+```javascript
+// .storybook/main.js
+
+module.exports = {
+  addons: ["pixel-perfect-storybook-addon"],
+};
+```
+
+### Usage
 
 In parameters of your stories:
 
