@@ -3,6 +3,7 @@ import { Checkbox, Slider } from "@mui/material";
 import { useAddonState, useStorybookState, useParameter, useChannel } from "@storybook/api";
 import { themes } from "@storybook/theming";
 import ControlTable from './ui/control-table/control-table';
+import { ResetButton } from "./ui/reset-button/reset-button";
 import { DEFAULT_DYNAMIC_OVERLAY_OPTIONS, EVENTS, DYNAMIC_OVERLAYS_OPTIONS_STATE, PARAM_KEY } from "../../constants";
 import { Parameter, DynamicOverlayOptions } from "../../types";
 
@@ -36,11 +37,47 @@ const PanelContent = () => {
         },
       )
     );
-  }, [dynamicOverlaysOptions, storyId, currentDynamicOverlayOptions]);
+  }, [dynamicOverlaysOptions, setDynamicOverlaysOptions, storyId, currentDynamicOverlayOptions]);
+
+  const isDifferentFromDefault: (option: "all" | keyof DynamicOverlayOptions) => boolean = useCallback((option) => {
+    if (option === "all") {
+      return Object
+        .keys(currentDynamicOverlayOptions)
+        .some((optionName: keyof DynamicOverlayOptions) => isDifferentFromDefault(optionName));
+    } else {
+      if (!(`${option}` in currentDynamicOverlayOptions)) {
+        return false;
+      } else if (parameter && parameter.overlay[option]) {
+        return currentDynamicOverlayOptions[option] !== parameter.overlay[option];
+      } else {
+        return currentDynamicOverlayOptions[option] !== DEFAULT_DYNAMIC_OVERLAY_OPTIONS[option];
+      }
+    }
+  }, [currentDynamicOverlayOptions, parameter]);
+
+  const resetOverlayOptions = useCallback((option: "all" | keyof DynamicOverlayOptions) => {
+    let replacement: DynamicOverlayOptions;
+
+    if (option === "all") {
+      replacement = {};
+    } else {
+      replacement = Object.assign({}, currentDynamicOverlayOptions);
+      delete replacement[option];
+    }
+
+    setDynamicOverlaysOptions(
+      Object.assign({}, dynamicOverlaysOptions, { [storyId]: replacement }),
+    );
+  }, [dynamicOverlaysOptions, setDynamicOverlaysOptions, storyId, currentDynamicOverlayOptions]);
 
   return (
     <div>
       <ControlTable
+        headReset={<ResetButton
+          title="Reset all options"
+          canReset={isDifferentFromDefault("all")}
+          onClick={() => resetOverlayOptions("all")}
+        />}
         rows={[
           {
             name: "Opacity",
@@ -60,6 +97,11 @@ const PanelContent = () => {
                 color: themes.normal.colorSecondary,
               }}
             />,
+            reset: <ResetButton
+              title="Reset opacity"
+              canReset={isDifferentFromDefault("opacity")}
+              onClick={() => resetOverlayOptions("opacity")}
+            />,
           },
           {
             name: "Enable color inversion",
@@ -74,6 +116,11 @@ const PanelContent = () => {
               sx={{
                 color: themes.normal.colorSecondary,
               }}
+            />,
+            reset: <ResetButton
+              title="Reset color inversion"
+              canReset={isDifferentFromDefault("colorInversion")}
+              onClick={() => resetOverlayOptions("colorInversion")}
             />,
           },
         ]}
