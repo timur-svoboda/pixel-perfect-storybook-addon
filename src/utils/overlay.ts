@@ -1,10 +1,13 @@
-import { DEFAULT_OVERLAY_OPTIONS } from "../constants";
 import { OverlayOptions } from "../types";
 
 const rootSelector = "#root";
 const overlayId = "pixel-perfect-overlay";
 
-export const renderOverlay = ({ src, opacity }: OverlayOptions) => {
+export const renderOverlay = ({
+  src,
+  opacity,
+  colorInversion,
+}: Required<OverlayOptions>) => {
   const root = document.querySelector(rootSelector);
   if (!root) return;
 
@@ -16,20 +19,17 @@ export const renderOverlay = ({ src, opacity }: OverlayOptions) => {
     const newOverlay = document.createElement("img");
     
     newOverlay.setAttribute("id", overlayId);
-    newOverlay.setAttribute("src", src);
     newOverlay.setAttribute("alt", "pixel perfect overlaying image");
-
     newOverlay.style.position = "absolute";
     newOverlay.style.top = `${rootRect.top}px`;
     newOverlay.style.left = `${rootRect.left}px`;
     newOverlay.style.zIndex = "100000";
-
-    newOverlay.style.opacity = opacity !== undefined
-      ? `${opacity}`
-      : `${DEFAULT_OVERLAY_OPTIONS.opacity}`;
-
-      newOverlay.style.filter = "invert(1)";
-      newOverlay.style.pointerEvents = "none";
+    newOverlay.style.pointerEvents = "none";
+    
+    // Customizations
+    newOverlay.setAttribute("src", src);
+    newOverlay.style.opacity = `${opacity}`;
+    newOverlay.style.filter = colorInversion ? "invert(1)" : "none";
 
     root.appendChild(newOverlay);
   } else {
@@ -39,6 +39,11 @@ export const renderOverlay = ({ src, opacity }: OverlayOptions) => {
 
     if (Number(existingOverlay.style.opacity) !== opacity) {
       existingOverlay.style.opacity = `${opacity}`;
+    }
+
+    const isInverted = existingOverlay.style.filter === "invert(1)";
+    if (isInverted !== colorInversion) {
+      existingOverlay.style.filter = colorInversion ? "invert(1)" : "none";
     }
   }
 }

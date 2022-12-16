@@ -1,6 +1,7 @@
 export type OverlayOptions = {
   src: string;
   opacity?: number;
+  colorInversion?: boolean;
 };
 
 export type Parameter = {
