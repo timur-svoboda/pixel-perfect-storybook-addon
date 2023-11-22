@@ -1,9 +1,16 @@
-import { DecoratorFunction, useChannel, useEffect, useState } from "@storybook/addons";
+import { useChannel, useEffect, useState, makeDecorator } from "@storybook/preview-api";
+
+
 import { DEFAULT_DYNAMIC_OVERLAY_OPTIONS, EVENTS } from "./constants";
 import { DynamicOverlayOptions } from "./types";
 import { renderOverlay, removeOverlay } from './utils/overlay';
 
-export const withOverlay: DecoratorFunction = (StoryFn, context) => {
+export const withOverlay = makeDecorator(
+  {
+    name: 'withOverlay',
+    parameterName: 'pixelPerfect',
+    skipIfNoParametersOrOptions: false,
+    wrapper: (StoryFn, context) => {
   const global = context.globals.pixelPerfect;
   const parameter = context.parameters.pixelPerfect;
   const [
@@ -35,5 +42,5 @@ export const withOverlay: DecoratorFunction = (StoryFn, context) => {
     };
   }, []);
 
-  return StoryFn();
-};
+  return StoryFn(context);
+}});
