@@ -1,6 +1,6 @@
 import { OverlayOptions } from "../types";
 
-const rootSelector = "#root";
+const rootSelector = "#storybook-root";
 const overlayId = "pixel-perfect-overlay";
 
 export const renderOverlay = ({

@@ -1,5 +1,5 @@
 import React, { useCallback } from "react";
-import { useGlobals } from "@storybook/api";
+import { useGlobals } from "@storybook/manager-api";
 import { Icons, IconButton } from "@storybook/components";
 import { TOGGLE_OVERLAY_TOOL_ID } from "./constants";
 
@@ -17,6 +17,7 @@ export const ToggleOverlayTool = () => {
   );
 
   return (
+    // @ts-ignore
     <IconButton
       key={TOGGLE_OVERLAY_TOOL_ID}
       active={pixelPerfect?.active}

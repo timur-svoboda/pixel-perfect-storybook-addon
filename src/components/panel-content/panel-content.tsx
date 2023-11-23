@@ -1,6 +1,6 @@
 import React, { useMemo, useEffect, useCallback } from "react";
 import { Checkbox, Slider } from "@mui/material";
-import { useAddonState, useStorybookState, useParameter, useChannel } from "@storybook/api";
+import { useAddonState, useStorybookState, useParameter, useChannel } from "@storybook/manager-api";
 import { themes } from "@storybook/theming";
 import ControlTable from './ui/control-table/control-table';
 import { ResetButton } from "./ui/reset-button/reset-button";
